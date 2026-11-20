@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f32">
+  <meta name="description" content="전희수의 행정·경영 분야 포트폴리오">
+  <title>전희수 | 행정·경영 포트폴리오</title>
+  <style>
+    :root {
+      --cream: #f6f2e8;
+      --paper: #fffdf7;
+      --green: #173f32;
+      --green-2: #285b49;
+      --sage: #dce7d9;
+      --mint: #edf2e9;
+      --ink: #24342d;
+      --muted: #68756d;
+      --line: #dce1d7;
+      --shadow: 0 18px 45px rgba(32, 57, 43, .10);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0; background: var(--cream); color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20; background: rgba(246,242,232,.92);
+      backdrop-filter: blur(14px); border-bottom: 1px solid rgba(23,63,50,.10);
+    }
+    .nav-wrap {
+      width: min(1120px, calc(100% - 40px)); min-height: 74px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { color: var(--green); font-weight: 850; letter-spacing: -.04em; font-size: 1.15rem; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: .92rem; color: #526259; font-weight: 650; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--green); }
+    .nav-toggle {
+      display: none; border: 1px solid var(--line); background: var(--paper); color: var(--green);
+      border-radius: 12px; padding: 8px 12px; cursor: pointer;
+    }
+    main { overflow: clip; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .hero { padding: 82px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 42px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px;
+      background: var(--sage); color: var(--green); border-radius: 999px;
+      font-size: .82rem; font-weight: 800; letter-spacing: .02em;
+    }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #6c9878; }
+    h1 { color: var(--green); font-size: clamp(1.9rem, 3.3vw, 2.8rem); line-height: 1.2; letter-spacing: -.055em; margin: 22px 0 18px; }
+    h1 .hero-name { display: block; color: var(--green); font-size: clamp(3.6rem, 7.2vw, 5.7rem); line-height: 1.02; letter-spacing: -.085em; font-weight: 900; margin-bottom: 14px; }
+    h1 .hero-tagline { color: #739078; font-size: clamp(1.85rem, 3.5vw, 2.8rem); }
+    h1 .hero-tagline span { color: var(--green); }
+    .hero-copy { max-width: 590px; color: #59675e; font-size: 1.06rem; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin: 25px 0 28px; }
+    .pill { background: rgba(255,255,255,.7); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: #526259; font-size: .84rem; font-weight: 650; }
+    .actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid var(--green); border-radius: 13px; padding: 12px 18px;
+      background: var(--green); color: white; font-weight: 750; cursor: pointer;
+    }
+    .btn.secondary { background: transparent; color: var(--green); }
+    .btn:hover { filter: brightness(1.08); }
+    .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid #a6c5a9; outline-offset: 3px; }
+    .scene-motion {
+      width: 100%; max-width: 520px; justify-self: end; position: relative;
+      transform: translate3d(0,0,0); transform-origin: 50% 55%;
+      will-change: transform;
+      touch-action: pan-y;
+    }
+    .scene-frame {
+      padding: 14px; background: linear-gradient(145deg, #fffdf7, #e7ecdf);
+      border: 1px solid rgba(23,63,50,.09); border-radius: 30px; box-shadow: var(--shadow);
+    }
+    .scene-motion svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .scene-caption { margin: 12px 8px 2px; color: #657168; font-size: .82rem; text-align: center; }
+    .motion-controls { display: flex; justify-content: flex-end; margin-top: 12px; }
+    .motion-toggle {
+      border: 1px solid #cbd7ca; border-radius: 999px; padding: 8px 13px;
+      color: var(--green); background: rgba(255,253,247,.85); font-size: .82rem; font-weight: 700; cursor: pointer;
+    }
+    section { padding: 70px 0; }
+    .section-head { margin-bottom: 28px; }
+    .section-kicker { color: #78917d; font-size: .78rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { color: var(--green); margin: 6px 0 8px; font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -.05em; line-height: 1.25; }
+    .section-desc { color: var(--muted); margin: 0; }
+    .about-panel, .card, .contact-panel {
+      background: var(--paper); border: 1px solid rgba(23,63,50,.08); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .about-panel { padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .about-panel p { margin: 0; color: #5b695f; }
+    .fact-list { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .fact { padding: 14px 16px; background: var(--mint); border-radius: 15px; }
+    .fact small { display: block; color: #748178; font-weight: 700; font-size: .76rem; }
+    .fact strong { color: var(--green); font-size: .98rem; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 24px; display: flex; flex-direction: column; min-height: 265px; }
+    .card-number { color: #8aa28c; font-size: .82rem; font-weight: 850; letter-spacing: .12em; }
+    .card h3 { color: var(--green); font-size: 1.18rem; line-height: 1.4; margin: 12px 0 9px; }
+    .card p { color: var(--muted); font-size: .92rem; margin: 0 0 20px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; margin-bottom: 18px; }
+    .tag { background: #edf2e9; color: #526e59; border-radius: 8px; padding: 5px 9px; font-size: .75rem; font-weight: 750; }
+    .detail-btn { align-self: flex-start; border: 0; padding: 0; background: none; color: var(--green); font-weight: 850; cursor: pointer; }
+    .detail-btn::after { content: " ↗"; }
+    .detail-panel {
+      display: none; margin-top: 16px; padding: 16px; border-radius: 14px;
+      background: #f0f4ed; color: #526259; font-size: .88rem;
+    }
+    .detail-panel.open { display: block; }
+    .detail-panel ul { margin: 8px 0 0; padding-left: 19px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .skill-list { display: grid; gap: 14px; }
+    .skill-item { background: var(--paper); border: 1px solid var(--line); padding: 17px 19px; border-radius: 16px; }
+    .skill-item strong { display: block; color: var(--green); }
+    .skill-item span { color: var(--muted); font-size: .9rem; }
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cert { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 17px; }
+    .cert strong { display: block; color: var(--green); }
+    .cert small { color: var(--muted); }
+    .timeline { border-left: 2px solid #cad8c9; margin-left: 8px; padding-left: 25px; display: grid; gap: 23px; }
+    .timeline-item { position: relative; }
+    .timeline-item::before { content: ""; position: absolute; left: -33px; top: 7px; width: 13px; height: 13px; border-radius: 50%; background: #6f9478; border: 3px solid var(--cream); }
+    .timeline-item time { color: #809184; font-size: .8rem; font-weight: 800; }
+    .timeline-item h3 { color: var(--green); margin: 3px 0; font-size: 1.05rem; }
+    .timeline-item p { color: var(--muted); margin: 0; font-size: .91rem; }
+    .contact-panel { padding: 34px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .contact-panel p { color: var(--muted); margin: 5px 0 0; }
+    .email-link { color: var(--green); font-weight: 850; font-size: 1.04rem; overflow-wrap: anywhere; }
+    footer { padding: 28px 20px 38px; text-align: center; color: #879188; font-size: .8rem; }
+    .fiction-note { margin: 24px auto 0; width: fit-content; max-width: 100%; padding: 9px 14px; border: 1px dashed #9aad9a; border-radius: 12px; color: #617264; font-size: .8rem; background: rgba(255,253,247,.55); }
+    @media (max-width: 850px) {
+      .hero { padding-top: 58px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .scene-motion { justify-self: center; max-width: 560px; }
+      .project-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      .nav-wrap { width: min(100% - 30px, 1120px); min-height: 66px; }
+      .nav-toggle { display: inline-flex; }
+      .nav-links {
+        display: none; position: absolute; top: 65px; left: 15px; right: 15px;
+        padding: 16px; background: var(--paper); border: 1px solid var(--line);
+        border-radius: 17px; box-shadow: var(--shadow); flex-direction: column; align-items: stretch; gap: 3px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 9px 8px; }
+      .container { width: min(100% - 30px, 1120px); }
+      .hero { padding: 48px 0 46px; }
+      h1 { font-size: clamp(1.75rem, 7vw, 2.25rem); }
+      h1 .hero-name { font-size: clamp(3.5rem, 16vw, 4.8rem); }
+      h1 .hero-tagline { font-size: clamp(1.75rem, 7vw, 2.2rem); }
+      section { padding: 52px 0; }
+      .about-panel, .two-col { grid-template-columns: 1fr; }
+      .about-panel { padding: 21px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .contact-panel { padding: 25px; align-items: flex-start; flex-direction: column; }
+      .scene-motion { max-width: 100%; }
+      .motion-controls { justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="맨 위로">HEESU PORTFOLIO</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">메뉴 ☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="주요 메뉴">
+        <a href="#about">소개</a><a href="#projects">프로젝트</a><a href="#skills">역량</a><a href="#activities">활동 기록</a><a href="#contact">연락처</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">PUBLIC ADMINISTRATION · BUSINESS</span>
+          <h1><span class="hero-name">전희수</span><span class="hero-tagline">행정의 시선으로<br><span>더 나은 내일을</span> 설계합니다.</span></h1>
+          <p class="hero-copy">안녕하세요. 행정학과 경영학을 함께 공부하며 공공의 문제를 체계적으로 바라보고, 자료를 분석해 실행 가능한 대안을 찾는 전희수입니다.</p>
+          <div class="hero-meta">
+            <span class="pill">가톨릭대학교</span><span class="pill">행정학과 · 경영학과 복수전공</span><span class="pill">9급 지방직 공무원 지원</span>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#projects">프로젝트 보기 <span aria-hidden="true">↓</span></a>
+            <a class="btn secondary" href="#contact">연락하기</a>
+          </div>
+          <p class="fiction-note">※ 본 페이지의 학력·자격·프로젝트·활동 이력은 포트폴리오 예시를 위한 설정이며, 실제 이력이 아닙니다.</p>
+        </div>
+
+        <div class="scene-motion" id="sceneMotion" aria-label="행정 업무 작업실 일러스트">
+          <div class="scene-frame">
+            <svg viewBox="0 0 520 390" role="img" aria-labelledby="sceneTitle sceneDesc" xmlns="http://www.w3.org/2000/svg">
+              <title id="sceneTitle">둥근 캐릭터의 행정 업무 작업실</title>
+              <desc id="sceneDesc">듀얼 모니터와 사무용 책상, 키보드, 서류, 아메리카노가 놓인 따뜻한 작업실에서 둥근 캐릭터가 행정 업무를 하고 있습니다.</desc>
+              <defs>
+                <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5edda"/><stop offset="1" stop-color="#dce8d8"/></linearGradient>
+                <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#bd9870"/><stop offset="1" stop-color="#987451"/></linearGradient>
+                <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#315b4c"/><stop offset="1" stop-color="#1b3d34"/></linearGradient>
+                <filter id="softShadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="7"/></filter>
+              </defs>
+              <rect x="8" y="8" width="504" height="374" rx="25" fill="url(#wall)"/>
+              <circle cx="80" cy="73" r="34" fill="#e8d9b9" opacity=".7"/>
+              <path d="M34 285V115q0-9 9-9h74q9 0 9 9v170" fill="#e8eee3"/>
+              <path d="M46 137h68M46 154h68" stroke="#c5d4c5" stroke-width="5" stroke-linecap="round"/>
+              <rect x="392" y="45" width="83" height="103" rx="10" fill="#f8f5e9" stroke="#cbd7c7" stroke-width="4"/>
+              <path d="M407 119q15-45 29-12 11-37 23-5" fill="none" stroke="#7d9a7c" stroke-width="5" stroke-linecap="round"/>
+              <ellipse cx="260" cy="337" rx="200" ry="17" fill="#6e604e" opacity=".16" filter="url(#softShadow)"/>
+              <!-- 듀얼 모니터 -->
+              <rect x="116" y="89" width="133" height="104" rx="9" fill="#45574e"/>
+              <rect x="123" y="96" width="119" height="89" rx="5" fill="url(#screen)"/>
+              <rect x="265" y="77" width="145" height="116" rx="9" fill="#45574e"/>
+              <rect x="272" y="84" width="131" height="101" rx="5" fill="url(#screen)"/>
+              <rect x="133" y="108" width="66" height="7" rx="3" fill="#d9e8d7"/>
+              <rect x="133" y="123" width="92" height="4" rx="2" fill="#91b79b"/>
+              <rect x="133" y="134" width="82" height="4" rx="2" fill="#91b79b"/>
+              <rect x="133" y="145" width="97" height="4" rx="2" fill="#91b79b"/>
+              <rect x="284" y="98" width="68" height="7" rx="3" fill="#d9e8d7"/>
+              <rect x="284" y="114" width="104" height="4" rx="2" fill="#91b79b"/>
+              <rect x="284" y="125" width="90" height="4" rx="2" fill="#91b79b"/>
+              <rect x="284" y="136" width="105" height="4" rx="2" fill="#91b79b"/>
+              <rect x="284" y="147" width="74" height="4" rx="2" fill="#91b79b"/>
+              <path d="M182 194v17m-18 0h36M337 194v17m-18 0h36" stroke="#68786e" stroke-width="7" stroke-linecap="round"/>
+              <!-- 책상 -->
+              <path d="M45 224q0-9 9-9h413q9 0 9 9v17H45z" fill="url(#desk)"/>
+              <path d="M67 241v99m384-99v99" stroke="#876747" stroke-width="12" stroke-linecap="round"/>
+              <!-- 캐릭터 몸과 얼굴 -->
+              <ellipse cx="255" cy="242" rx="48" ry="17" fill="#6c5d49" opacity=".13"/>
+              <path d="M210 230q0-49 46-49t48 49v19h-94z" fill="#6f9277"/>
+              <path d="M216 178q-7-43 34-53 42-4 49 39l-2 57q-13 16-20 18l-2-43-37-4-7 47q-14-8-20-23z" fill="#55483d"/>
+              <circle cx="256" cy="177" r="38" fill="#f2cda5"/>
+              <path d="M220 166q-2-35 35-38 35 1 38 33-17-13-33-12-19 0-40 21" fill="#55483d"/>
+              <path d="M281 139q10 8 12 22" fill="none" stroke="#55483d" stroke-width="8" stroke-linecap="round"/>
+              <path d="M289 145l8-7 7 8-8 7z" fill="#d58b78" stroke="#fff1dc" stroke-width="2"/>
+              <circle cx="242" cy="178" r="3.5" fill="#35443b"/><circle cx="270" cy="178" r="3.5" fill="#35443b"/>
+              <path d="M248 192q8 7 16 0" fill="none" stroke="#b66e60" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="229" cy="188" r="5" fill="#eaa99a" opacity=".7"/><circle cx="282" cy="188" r="5" fill="#eaa99a" opacity=".7"/>
+              <path d="M218 218q-22 9-29 25m84-25q20 8 27 23" fill="none" stroke="#f2cda5" stroke-width="12" stroke-linecap="round"/>
+              <!-- 키보드 -->
+              <path d="M179 263l118 0 20 22H160z" fill="#e9e8dc" stroke="#b8c4b6" stroke-width="3"/>
+              <g fill="#9bad9d"><rect x="178" y="269" width="12" height="5" rx="2"/><rect x="194" y="269" width="12" height="5" rx="2"/><rect x="210" y="269" width="12" height="5" rx="2"/><rect x="226" y="269" width="12" height="5" rx="2"/><rect x="242" y="269" width="12" height="5" rx="2"/><rect x="258" y="269" width="12" height="5" rx="2"/><rect x="274" y="269" width="12" height="5" rx="2"/><rect x="190" y="278" width="92" height="4" rx="2"/></g>
+              <!-- 서류 -->
+              <path d="M72 198h66l13 13v49H72z" fill="#fffdf5" stroke="#c8d1c4" stroke-width="2"/>
+              <path d="M138 198v14h13" fill="#e8eee3" stroke="#c8d1c4" stroke-width="2"/>
+              <path d="M84 221h49m-49 9h43m-43 9h35" stroke="#9aab9a" stroke-width="3" stroke-linecap="round"/>
+              <rect x="89" y="191" width="17" height="7" rx="3" fill="#c9826d"/>
+              <!-- 아메리카노 -->
+              <rect x="367" y="239" width="43" height="42" rx="7" fill="#fffaf0" stroke="#c8c9b8" stroke-width="3"/>
+              <path d="M410 248h9q13 0 8 14-3 9-17 8" fill="none" stroke="#c8c9b8" stroke-width="5"/>
+              <path d="M371 250h35v23h-35z" fill="#8a6044"/>
+              <path d="M378 235q-8-12 2-18m13 18q-7-12 3-19" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+              <path d="M356 287h74" stroke="#8a6d4e" stroke-width="4" stroke-linecap="round"/>
+              <text x="260" y="319" text-anchor="middle" fill="#f8f2e6" font-size="10" font-weight="700" letter-spacing="2">FOCUS · ORGANIZE · SERVE</text>
+            </svg>
+            <p class="scene-caption">자료를 정리하고 민원과 정책을 살피는 가상의 행정 업무 작업실</p>
+          </div>
+          <div class="motion-controls">
+            <button class="motion-toggle" id="motionToggle" type="button" aria-pressed="false">움직임 멈추기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">01 · ABOUT</span><h2>소개</h2><p class="section-desc">배움과 경험을 공공의 가치로 연결하고자 합니다.</p></div>
+        <div class="about-panel">
+          <p>행정학을 통해 공공정책과 지방자치의 구조를 배우고, 경영학을 통해 조직 운영과 전략적 사고를 익히고 있습니다. 정보를 정확하게 정리하고 다양한 관점을 조율하는 태도를 바탕으로 지역사회에 실질적인 도움을 주는 공직자가 되는 것을 목표로 합니다.</p>
+          <div class="fact-list">
+            <div class="fact"><small>학교</small><strong>가톨릭대학교</strong></div>
+            <div class="fact"><small>전공</small><strong>행정학과 · 경영학과</strong></div>
+            <div class="fact"><small>관심 분야</small><strong>지방행정 · 정책 분석</strong></div>
+            <div class="fact"><small>지원 분야</small><strong>9급 지방직 공무원</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">02 · PROJECTS</span><h2>주요 프로젝트</h2><p class="section-desc">문제를 정의하고 자료를 분석해 해결 방향을 제안한 프로젝트입니다.</p></div>
+        <div class="project-grid">
+          <article class="card">
+            <span class="card-number">PROJECT 01</span><h3>블록체인 기술과 공공행정 활용 가능성 분석</h3>
+            <p>블록체인의 분산원장 구조와 투명성·추적 가능성을 살펴보고 공공서비스 적용 가능성과 한계를 정리했습니다.</p>
+            <div class="tag-row"><span class="tag">블록체인</span><span class="tag">행정정보</span><span class="tag">기술 분석</span></div>
+            <button class="detail-btn" type="button" aria-expanded="false" aria-controls="detail1">상세 보기</button>
+            <div class="detail-panel" id="detail1"><strong>분석 내용</strong><ul><li>분산원장·합의 과정 등 핵심 개념 조사</li><li>공공기록 관리와 행정서비스 적용 사례 검토</li><li>개인정보 보호, 비용, 제도적 정합성 등 도입 과제 도출</li></ul><p><strong>결과:</strong> 기술 도입 자체보다 업무 목적과 데이터 보호 원칙을 먼저 설계해야 한다는 결론을 제시했습니다.</p></div>
+          </article>
+          <article class="card">
+            <span class="card-number">PROJECT 02</span><h3>지역 생활 서비스 접근성 개선 제안</h3>
+            <p>주민이 일상에서 이용하는 생활 서비스의 접근성 문제를 살펴보고 지역 단위 개선 방향을 구상했습니다.</p>
+            <div class="tag-row"><span class="tag">지역정책</span><span class="tag">문제 구조화</span><span class="tag">정책 제안</span></div>
+            <button class="detail-btn" type="button" aria-expanded="false" aria-controls="detail2">상세 보기</button>
+            <div class="detail-panel" id="detail2"><strong>분석 내용</strong><ul><li>생활 서비스 이용 과정에서 발생하는 불편 요인 분류</li><li>주민 접근성 및 정보 격차 관점에서 문제 정리</li><li>기존 시설·서비스 연계와 안내 체계 개선안 제시</li></ul><p><strong>결과:</strong> 신규 시설 확충뿐 아니라 기존 자원의 연결과 정보 전달 개선도 중요하다고 정리했습니다.</p></div>
+          </article>
+          <article class="card">
+            <span class="card-number">PROJECT 03</span><h3>공공기관의 조직 운영과 성과관리 조사</h3>
+            <p>공공조직의 목표 설정, 업무 분담, 성과관리 요소를 경영학 관점에서 비교·정리했습니다.</p>
+            <div class="tag-row"><span class="tag">조직관리</span><span class="tag">성과관리</span><span class="tag">경영학</span></div>
+            <button class="detail-btn" type="button" aria-expanded="false" aria-controls="detail3">상세 보기</button>
+            <div class="detail-panel" id="detail3"><strong>분석 내용</strong><ul><li>공공조직과 민간조직의 목표 및 성과 기준 비교</li><li>조직 내 의사소통과 협업 구조 조사</li><li>공공성과 효율성을 함께 고려하는 관리 방향 제안</li></ul><p><strong>결과:</strong> 수치 중심 평가에 더해 서비스 품질과 주민 만족을 함께 고려해야 한다고 제안했습니다.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">03 · CAPABILITIES</span><h2>역량 및 자격</h2><p class="section-desc">학업과 프로젝트를 통해 쌓은 기초 역량을 정리했습니다.</p></div>
+        <div class="two-col">
+          <div class="skill-list">
+            <div class="skill-item"><strong>자료 조사 및 분석</strong><span>다양한 자료를 비교하고 핵심 쟁점과 시사점을 구조화</span></div>
+            <div class="skill-item"><strong>문서 작성 및 정보 정리</strong><span>보고서·발표 자료를 목적에 맞게 구성하고 전달</span></div>
+            <div class="skill-item"><strong>협업 및 의사소통</strong><span>역할을 조정하고 구성원의 의견을 반영해 공동 결과물 완성</span></div>
+            <div class="skill-item"><strong>일정 관리 및 책임감</strong><span>마감일과 업무 우선순위를 고려해 계획적으로 과제 수행</span></div>
+          </div>
+          <div>
+            <h3 style="color:var(--green);margin:0 0 14px">보유 자격증</h3>
+            <div class="cert-grid">
+              <div class="cert"><strong>한국사능력검정시험</strong><small>취득 완료 · 등급·회차는 가상 설정에서 미기재</small></div>
+              <div class="cert"><strong>컴퓨터활용능력 2급</strong><small>취득 완료 · 취득일은 가상 설정에서 미기재</small></div>
+            </div>
+            <p style="font-size:.82rem;color:var(--muted);margin-top:14px">※ 자격증 보유 여부와 세부 이력은 실제 증빙 정보가 아닌 가상 포트폴리오 설정입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="activities">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">04 · ACTIVITIES</span><h2>활동 기록</h2><p class="section-desc">학업과 진로 준비 과정에서의 주요 활동을 시간순으로 정리했습니다.</p></div>
+        <div class="timeline">
+          <div class="timeline-item"><time>학업 활동 · 가상</time><h3>행정학·경영학 복수전공 학습</h3><p>공공정책, 지방행정, 조직관리, 경영전략 등 전공 기초 지식을 폭넓게 학습.</p></div>
+          <div class="timeline-item"><time>팀 프로젝트 · 가상</time><h3>블록체인 기술 분석 프로젝트 수행</h3><p>기술의 작동 원리와 공공부문 활용 가능성, 도입 시 고려사항을 조사하고 발표 자료로 구성.</p></div>
+          <div class="timeline-item"><time>역량 개발 · 가상</time><h3>문서·정보 활용 역량 강화</h3><p>컴퓨터활용능력 및 한국사 학습을 통해 행정 업무에 필요한 기초 역량을 준비.</p></div>
+          <div class="timeline-item"><time>진로 준비 · 가상</time><h3>9급 지방직 공무원 진로 탐색</h3><p>지방자치와 주민 중심 행정에 관심을 두고 공직 가치와 직무 이해를 넓히는 중.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head"><span class="section-kicker">05 · CONTACT</span><h2>연락처</h2><p class="section-desc">포트폴리오 관련 문의는 아래 이메일로 연락해 주세요.</p></div>
+        <div class="contact-panel">
+          <div><h3 style="margin:0;color:var(--green)">함께 더 나은 행정을 고민하겠습니다.</h3><p>읽어주셔서 감사합니다.</p></div>
+          <a class="email-link" href="mailto:hee2618@gmail.com">hee2618@gmail.com ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 HEESU PORTFOLIO · 학력 및 모든 이력은 포트폴리오 예시를 위한 설정입니다.</footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // 모바일 메뉴 열기/닫기 및 메뉴 선택 후 자동 닫기
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+        navToggle.textContent = isOpen ? "닫기 ×" : "메뉴 ☰";
+      });
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.textContent = "메뉴 ☰";
+        });
+      });
+
+      // 프로젝트별 상세 내용 토글
+      document.querySelectorAll(".detail-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const panel = document.getElementById(button.getAttribute("aria-controls"));
+          const willOpen = !panel.classList.contains("open");
+          panel.classList.toggle("open", willOpen);
+          button.setAttribute("aria-expanded", String(willOpen));
+          button.textContent = willOpen ? "상세 내용 닫기" : "상세 보기";
+        });
+      });
+
+      // 작업실 일러스트 모션: rAF 시간 기반 부유 + PC 포인터 추적 + 스크롤 반응
+      const scene = document.getElementById("sceneMotion");
+      const motionToggle = document.getElementById("motionToggle");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+      const state = {
+        paused: false,
+        hidden: document.hidden,
+        pointerX: 0, pointerY: 0,
+        targetX: 0, targetY: 0,
+        scrollY: window.scrollY,
+        currentX: 0, currentY: 0,
+        currentTiltX: 0, currentTiltY: 0,
+        rafId: null,
+        lastTime: 0
+      };
+
+      function setPaused(paused, byUser = true) {
+        state.paused = paused;
+        motionToggle.setAttribute("aria-pressed", String(paused));
+        motionToggle.textContent = paused ? "움직임 다시 켜기" : "움직임 멈추기";
+        if (paused) {
+          if (state.rafId !== null) cancelAnimationFrame(state.rafId);
+          state.rafId = null;
+          scene.style.transform = "translate3d(0,0,0) rotateX(0deg) rotateY(0deg)";
+        } else if (!state.hidden && !reduceMotion.matches) {
+          state.lastTime = 0;
+          state.rafId = requestAnimationFrame(animate);
+        }
+      }
+
+      motionToggle.addEventListener("click", () => setPaused(!state.paused));
+
+      function onPointerMove(event) {
+        if (!finePointer.matches || state.paused || reduceMotion.matches) return;
+        const rect = scene.getBoundingClientRect();
+        const x = (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+        const y = (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+        state.targetX = Math.max(-1, Math.min(1, x));
+        state.targetY = Math.max(-1, Math.min(1, y));
+      }
+      function resetPointer() { state.targetX = 0; state.targetY = 0; }
+      scene.addEventListener("pointermove", onPointerMove);
+      scene.addEventListener("pointerleave", resetPointer);
+      window.addEventListener("blur", resetPointer);
+      window.addEventListener("scroll", () => { state.scrollY = window.scrollY; }, { passive: true });
+
+      function animate(timestamp) {
+        if (state.paused || state.hidden || reduceMotion.matches) {
+          state.rafId = null;
+          return;
+        }
+        if (!state.lastTime) state.lastTime = timestamp;
+        const delta = Math.min((timestamp - state.lastTime) / 1000, 0.05);
+        state.lastTime = timestamp;
+
+        // 약 7초 주기의 부드러운 위아래 부유(진폭 최대 18px)
+        const floatY = Math.sin((timestamp / 1000) * (2 * Math.PI / 7)) * 18;
+        // 포인터 입력은 PC에서만 적용하고 목표값을 부드럽게 따라감
+        const pointerActive = finePointer.matches;
+        const aimX = pointerActive ? state.targetX : 0;
+        const aimY = pointerActive ? state.targetY : 0;
+        const follow = 1 - Math.exp(-7 * delta);
+        state.currentX += (aimX * 10 - state.currentX) * follow;
+        state.currentY += (aimY * 8 - state.currentY) * follow;
+
+        // 회전은 최대 35도 이내로 제한
+        const wantedTiltY = Math.max(-35, Math.min(35, state.currentX * 1.7));
+        const wantedTiltX = Math.max(-35, Math.min(35, -state.currentY * 1.7));
+        state.currentTiltX += (wantedTiltX - state.currentTiltX) * follow;
+        state.currentTiltY += (wantedTiltY - state.currentTiltY) * follow;
+
+        // 스크롤에 따라 위쪽으로 최대 50px 이동
+        const scrollShift = Math.max(-50, Math.min(0, -(window.scrollY - 0) * 0.12));
+        const y = floatY + scrollShift;
+        scene.style.transform =
+          `translate3d(${state.currentX.toFixed(2)}px, ${(y + state.currentY).toFixed(2)}px, 0) ` +
+          `perspective(900px) rotateX(${state.currentTiltX.toFixed(2)}deg) rotateY(${state.currentTiltY.toFixed(2)}deg)`;
+
+        state.rafId = requestAnimationFrame(animate);
+      }
+
+      function stopForEnvironment() {
+        if (state.rafId !== null) cancelAnimationFrame(state.rafId);
+        state.rafId = null;
+        if (!state.paused) scene.style.transform = "translate3d(0,0,0)";
+      }
+      function startIfAllowed() {
+        if (!state.paused && !state.hidden && !reduceMotion.matches) {
+          if (state.rafId === null) {
+            state.lastTime = 0;
+            state.rafId = requestAnimationFrame(animate);
+          }
+        } else {
+          stopForEnvironment();
+        }
+      }
+      document.addEventListener("visibilitychange", () => {
+        state.hidden = document.hidden;
+        startIfAllowed();
+      });
+      reduceMotion.addEventListener?.("change", startIfAllowed);
+      finePointer.addEventListener?.("change", resetPointer);
+
+      if (reduceMotion.matches) {
+        // 사용자가 동작 줄이기를 요청한 환경에서는 정지 상태로 시작
+        state.paused = true;
+        motionToggle.setAttribute("aria-pressed", "true");
+        motionToggle.textContent = "움직임 다시 켜기";
+      } else {
+        startIfAllowed();
+      }
+    })();
+  </script>
+</body>
+</html>
